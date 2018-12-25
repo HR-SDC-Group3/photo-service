@@ -6,6 +6,7 @@ const app = express();
 
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: true }));
+app.use(express.static('client/dist/'));
 
 app.get('/photos/restaurantName', (req, res) => {
   Promise.resolve(db.find())

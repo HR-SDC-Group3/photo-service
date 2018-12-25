@@ -1,17 +1,57 @@
 {
-  "name": "",
-  "version": "",
-  "description": "",
+  "name": "hrsf107-front-end-capstone",
+  "description": "> Project description",
   "author": "",
-  "license": "",
+  "license": "ISC",
   "engines": {
     "node": ">=6.13.0"
   },
   "scripts": {
+    "server": "nodemon server/server.js",
+    "seed": "node ./database/seed_function.js",
+    "react-dev": "webpack -d --watch",
+    "test": "jest",
+    "test:watch": "jest--watch",
+    "test:coverage": "jest --coverage --colors"
   },
   "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "faker": "^4.1.0",
+    "mongoose": "^5.4.0",
+    "nodemon": "^1.18.9",
+    "path": "^0.12.7",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0"
   },
   "devDependencies": {
-    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor"
-  }
+    "@babel/cli": "^7.2.0",
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.2.3",
+    "@babel/preset-react": "^7.0.0",
+    "axios": "^0.18.0",
+    "babel-jest": "^23.4.2",
+    "babel-loader": "^8.0.4",
+    "babel-preset-airbnb": "^3.2.0",
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.7.1",
+    "eslint": "^5.10.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "jest": "^23.6.0",
+    "url-parse": "^1.4.4",
+    "webpack": "^4.28.1",
+    "webpack-cli": "^3.1.2"
+  },
+  "version": "1.0.0",
+  "main": ".eslintrc.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reserveMe/photo-carousel-server.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/reserveMe/photo-carousel-server/issues"
+  },
+  "homepage": "https://github.com/reserveMe/photo-carousel-server#readme"
 }
