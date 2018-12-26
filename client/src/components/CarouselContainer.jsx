@@ -19,10 +19,11 @@ class CarouselContainer extends React.Component {
   }
 
   render() {
+
     return (
       <div className="carousel-container" >
         <RestaurantPhotos photos={this.state.userPhotos} onClick={this.handleModalDisplay} show={this.state.isOpen} />
-      </div>
+      </div >
     )
   }
 }
