@@ -1,17 +1,34 @@
 import React from 'react';
+import Modal from './Modal.jsx';
 
-const RestaurantPhotos = (props) => {
+class RestaurantPhotos extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showModal: false,
+    }
+    this.toggleModal = this.toggleModal.bind(this);
+  }
 
-  let photos = props.photos.map((object, index) => {
-    return (
-      <li>
-        <img src={object.photoURL} key={index} onClick={props.onClick}></img>
-      </li>
-    )
-  })
+  toggleModal() {
+    this.setState(prevState => ({
+      showModal: !prevState.showModal
+    }))
+  }
 
-  return props.show ? <div onClick={props.onClick}>{photos}</div> : <h1 onClick={props.onClick}>Hello Falsey</h1>
-
-}
+  render() {
+    { console.log(this.props.photos, 'Props being passed to Modal') }
+    if (this.state.showModal === false) {
+      return this.props.photos.map((card, index) => {
+        if (index < 6) {
+          return (
+            <li><span className="carousel-card"><img src={card.photoURL} key={index} onClick={this.toggleModal}></img></span></li>
+          )
+        }
+      })
+    }
+    return <Modal userPhotos={this.props.photos} />
+  }
+};
 
 export default RestaurantPhotos;
