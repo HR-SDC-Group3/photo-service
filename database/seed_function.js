@@ -52,16 +52,17 @@ const restaurantThumbnails = [
   'https://s3-us-west-1.amazonaws.com/reserve-me-assets/thumbnails/strawberrycake_small.jpg',
   'https://s3-us-west-1.amazonaws.com/reserve-me-assets/thumbnails/tartar_small.jpg',
   'https://s3-us-west-1.amazonaws.com/reserve-me-assets/thumbnails/uni_small.jpg',
-]
+];
 
 const restaurants = [];
 
 // Generates an array of user photos and meta data //
+
 const generateUserPhotos = () => {
   const userPhotos = [];
 
-  for (let i = 0; i < 23; i += 1) {
-    let userPhoto = {
+  for (let i = 0; i < restaurantPhotos.length; i += 1) {
+    const userPhoto = {
       photo_description: faker.lorem.sentence(),
       date: faker.date.recent(),
       username: faker.name.findName(),
@@ -73,16 +74,26 @@ const generateUserPhotos = () => {
   return userPhotos;
 };
 
+
 // Builds out Restaurant Mongo schema with userPhotos array //
-for (let i = 1; i < restaurantPhotos.length; i += 1) {
-  restaurants.push({
-    _id: i,
-    name: faker.name.findName(),
-    userPhotos: generateUserPhotos(),
-  });
+for (let i = 0; i < restaurantPhotos.length; i += 1) {
+  // Manually push in Saratoga restaurant //
+  if (i === 0) {
+    restaurants.push({
+      _id: i,
+      name: 'The Saratoga',
+      userPhotos: generateUserPhotos(),
+    });
+  } else {
+    restaurants.push({
+      _id: i,
+      name: faker.name.findName(),
+      userPhotos: generateUserPhotos(),
+    });
+  }
 }
 
-// Saves to MongoDB //
+// Iterates over each document and saves to Mongo // 
 
 restaurants.forEach((restaurant) => {
   dbConnection.saveRestaurant(restaurant);

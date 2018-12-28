@@ -4,8 +4,6 @@ const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/restaurant');
 const db = mongoose.connection;
 
-
-// Put your restaurant schema here //
 const restaurantSchema = new mongoose.Schema({
   _id: Number,
   name: String,
@@ -15,6 +13,7 @@ const restaurantSchema = new mongoose.Schema({
       date: String,
       username: String,
       photoURL: String,
+      photoThumbnail: String,
     },
   ],
 });

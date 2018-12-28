@@ -8,7 +8,7 @@ app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(express.static('client/dist/'));
 
-app.get('/photos/restaurantName', (req, res) => {
+app.get('/photos/restaurants/', (req, res) => {
   Promise.resolve(db.find())
     .then((results) => {
       res.status(200).send(results);
