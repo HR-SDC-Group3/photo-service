@@ -1,4 +1,5 @@
 import React from 'react';
+import Axios from 'axios';
 import Modal from './Modal.jsx';
 
 class RestaurantPhotos extends React.Component {
@@ -6,28 +7,43 @@ class RestaurantPhotos extends React.Component {
     super(props);
     this.state = {
       showModal: false,
+      restaurantPhotos: [],
     }
     this.toggleModal = this.toggleModal.bind(this);
   }
 
   toggleModal() {
     this.setState(prevState => ({
-      showModal: !prevState.showModal
-    }))
+      showModal: !prevState.showModal,
+    }));
+  }
+
+  componentDidMount() {
+    Axios.get('/photos/restaurants/')
+      .then((response) => {
+        this.setState({
+          restaurantPhotos: response.data,
+        })
+      })
+      .catch((error) => {
+        console.log('Error fetching data')
+      })
   }
 
   render() {
-    { console.log(this.props.photos, 'Props being passed to Modal') }
-    if (this.state.showModal === false) {
-      return this.props.photos.map((card, index) => {
-        if (index < 6) {
-          return (
-            <li><span className="carousel-card"><img src={card.photoURL} key={index} onClick={this.toggleModal}></img></span></li>
-          )
-        }
-      })
+    const { restaurantPhotos } = this.state
+
+    if (restaurantPhotos) {
+      return <div>Loading...</div>
     }
-    return <Modal userPhotos={this.props.photos} />
+
+    return restaurantPhotos.userPhotos.map((card, index) => {
+      return (
+        <div>
+          <li><img src={card.photoThumbnail} key={index} onClick={this.toggleModal}></img></li>
+        </div>
+      )
+    })
   }
 };
 
