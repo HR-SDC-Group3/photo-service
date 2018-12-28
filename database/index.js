@@ -31,9 +31,13 @@ const saveRestaurant = (obj) => {
   });
 };
 
-const find = () => {
-  return new Promise((resolve) => {
-    resolve(Restaurant.find({ _id: 0 }));
+const find = (callback) => {
+  Restaurant.find({ _id: 0 }, (err, res) => {
+    if (err) {
+      console.log('error finding restaurant', err);
+    } else {
+      callback(res);
+    }
   });
 };
 
