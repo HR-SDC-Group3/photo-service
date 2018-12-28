@@ -33,7 +33,7 @@ const saveRestaurant = (obj) => {
 
 const find = () => {
   return new Promise((resolve) => {
-    resolve(Restaurant.find({}));
+    resolve(Restaurant.find({ _id: 0 }));
   });
 };
 

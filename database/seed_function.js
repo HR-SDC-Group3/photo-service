@@ -67,7 +67,7 @@ const generateUserPhotos = () => {
       date: faker.date.recent(),
       username: faker.name.findName(),
       photoURL: restaurantPhotos[i],
-      photoThumbnails: restaurantThumbnails[i],
+      photoThumbnail: restaurantThumbnails[i],
     };
     userPhotos.push(userPhoto);
   }
