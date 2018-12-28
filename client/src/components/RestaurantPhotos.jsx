@@ -1,5 +1,4 @@
 import React from 'react';
-import Axios from 'axios';
 import Modal from './Modal.jsx';
 
 class RestaurantPhotos extends React.Component {
@@ -7,7 +6,6 @@ class RestaurantPhotos extends React.Component {
     super(props);
     this.state = {
       showModal: false,
-      restaurantPhotos: [],
     }
     this.toggleModal = this.toggleModal.bind(this);
   }
@@ -18,33 +16,28 @@ class RestaurantPhotos extends React.Component {
     }));
   }
 
-  componentDidMount() {
-    Axios.get('/photos/restaurants/')
-      .then((response) => {
-        this.setState({
-          restaurantPhotos: response.data,
-        })
-      })
-      .catch((error) => {
-        console.log('Error fetching data')
-      })
-  }
+  //Have a condition to show something if restaurantPhotos = null
+  //Need to have a double map
 
   render() {
-    const { restaurantPhotos } = this.state
-
-    if (restaurantPhotos) {
-      return <div>Loading...</div>
-    }
-
-    return restaurantPhotos.userPhotos.map((card, index) => {
+    if (this.props.isLoading) {
       return (
         <div>
-          <li><img src={card.photoThumbnail} key={index} onClick={this.toggleModal}></img></li>
+          {this.props.photos.map((restaurant, index) => {
+            return restaurant.userPhotos.map((photo, index) => {
+              return (
+                <li><img src={photo.photoURL} key={index} onClick={this.toggleModal}></img></li>
+              )
+            })
+          })}
         </div>
       )
-    })
+    } else {
+      return (
+        <h1>Loading...</h1>
+      )
+    }
   }
-};
+}
 
 export default RestaurantPhotos;
