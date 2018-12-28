@@ -6,20 +6,24 @@ class RestaurantPhotos extends React.Component {
     super(props);
     this.state = {
       showModal: false,
+      currentModal: '',
     }
     this.toggleModal = this.toggleModal.bind(this);
   }
 
-  toggleModal() {
+  toggleModal(event) {
+    const modalImage = event.target.src;
+
     this.setState(prevState => ({
       showModal: !prevState.showModal,
+      currentModal: modalImage,
     }));
+
+    console.log(this.state)
   }
 
-  //Have a condition to show something if restaurantPhotos = null
-  //Need to have a double map
-
   render() {
+    console.log(this.state)
     if (this.props.isLoading) {
       return (
         <div>

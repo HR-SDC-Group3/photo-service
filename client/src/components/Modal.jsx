@@ -32,26 +32,21 @@ const Modal = (props) => {
     margin: '0 auto',
   }
 
-
   return (
-    props.userPhotos.map((userPhoto) => {
-      return (
-        <div style={backdropStyle}>
-          <div style={modalStyle}>
-            <button onClick={props.onClick}>Close</button>
-            <img src={userPhoto.photoURL} style={imageStyle} id="carousel-modal"></img>
-            <div style={footerStyle}>
-              <br></br>
-              <div><span className="carousel-description">{userPhoto.description}</span></div>
-              <div><span className="carousel-username">{userPhoto.username}</span></div>
-              <div><span className="carousel-date">{userPhoto.date}</span></div>
-              <a href="#">&#10094; Previous</a>
-              <a href="#">Next &#10095;</a>
-            </div>
-          </div>
+    <div style={backdropStyle}>
+      <div style={modalStyle}>
+        <button onClick={props.onClick}>Close</button>
+        <img src={props.currentModal} style={imageStyle} id="carousel-modal"></img>
+        <div style={footerStyle}>
+          <br></br>
+          <div><span className="carousel-description">{userPhoto.description}</span></div>
+          <div><span className="carousel-username">{userPhoto.username}</span></div>
+          <div><span className="carousel-date">{userPhoto.date}</span></div>
+          <a href="#">&#10094; Previous</a>
+          <a href="#">Next &#10095;</a>
         </div>
-      )
-    })
+      </div>
+    </div>
   )
 }
 
