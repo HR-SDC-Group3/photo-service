@@ -9,10 +9,11 @@ app.use(bodyparser.urlencoded({ extended: true }));
 app.use(express.static('client/dist/'));
 
 app.get('/photos/restaurants/', (req, res) => {
-  Promise.resolve(db.find())
+  Promise.resolve(db.find({ _id: 0 }))
     .then((results) => {
       res.status(200).send(results);
-    }).catch((error) => {
+    })
+    .catch((error) => {
       console.log(error);
     });
 });
