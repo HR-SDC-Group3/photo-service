@@ -6,14 +6,25 @@ const app = express();
 
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: true }));
+app.use(express.static('client/dist/'));
 
-app.get('/photos/restaurantName', (req, res) => {
-  Promise.resolve(db.find())
-    .then((results) => {
-      res.status(200).send(results);
-    }).catch((error) => {
-      console.log(error);
-    });
+// app.get('/photos/restaurants/', (req, res) => {
+//   Promise.resolve(db.find({ _id: 0 }))
+//     .then((results) => {
+//       console.log('Promise on the server');
+//       res.status(200);
+//       res.send(results);
+//     })
+//     .catch((error) => {
+//       console.log(error);
+//     });
+// });
+
+app.get('/photos/restaurants/', (req, res) => {
+  db.find((response) => {
+    res.status(200);
+    res.send(response);
+  });
 });
 
 const port = 3003;
