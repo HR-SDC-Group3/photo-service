@@ -36,7 +36,7 @@ const find = (callback) => {
     if (err) {
       console.log('error finding restaurant', err);
     } else {
-      callback(res);
+      callback(null, res);
     }
   });
 };
