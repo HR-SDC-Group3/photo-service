@@ -8,13 +8,6 @@ app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(express.static('client/dist/'));
 
-// app.get('/photos/restaurants/', (req, res) => {
-//   db.find((err, response) => {
-//     res.status(200);
-//     res.send(response);
-//   });
-// });
-
 app.get('/photos/restaurants/', (req, res) => {
   db.find((err, response) => {
     if (err) {
