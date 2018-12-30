@@ -18,7 +18,7 @@ describe('<RestaurantPhotos />', () => {
   })
 
   it('Should receive a handler function from Carousel parent', () => {
-    const wrapper = shallow(<RestaurantPhotos photos={} />);
+    const wrapper = shallow(<RestaurantPhotos />);
     expect(wrapper.instance().props.photos).toBe(true);
   });
 
