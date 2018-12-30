@@ -4,6 +4,8 @@ import Carousel from '../src/components/Carousel.jsx';
 import axios from 'axios';
 import MockAdapter from 'axios-mock-adapter';
 
+jest.mock('axios');
+
 describe('<Carousel />', () => {
 
   it('renders a single Carousel component', () => {
