@@ -28,6 +28,12 @@ const modalStyle = {
   justifySelf: 'center',
 }
 
+const imageStyle = {
+  marginLeft: 'auto',
+  marginRight: 'auto',
+}
+
+
 class Modal extends React.Component {
   constructor(props) {
     super(props);
@@ -51,8 +57,7 @@ class Modal extends React.Component {
     return ReactDOM.createPortal(
       <div style={backgroundStyle}>
         <div style={modalStyle}>
-          <h2>Hello World</h2>
-          <img src={modalImage}></img>
+          <img src={modalImage} style={imageStyle}></img>
           <button onClick={onClose}>Close</button>
         </div>
       </div>,
