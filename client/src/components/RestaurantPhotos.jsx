@@ -67,10 +67,10 @@ class RestaurantPhotos extends React.Component {
       )
     } else if ((isLoading) && (headerStyleToDisplay[this.generateHeaderView()] === 0)) {
       return (
+        // Still only displaying bone marrow. Requires fixing later //
         <div>
           {photos.map((restaurant, index) => {
-            const headerToDisplay = _.find(restaurant.userPhotos, (userPhotos) => { return userPhotos[index] = this.generateRandomIndex() })
-            console.log(headerToDisplay)
+            const headerToDisplay = _.find(restaurant.userPhotos, (userPhoto) => { return userPhoto[index] = this.generateRandomIndex() })
             return <img src={headerToDisplay.photoURL} id="carousel-header"></img>
           })
           }
