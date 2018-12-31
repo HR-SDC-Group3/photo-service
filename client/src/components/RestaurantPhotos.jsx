@@ -58,12 +58,15 @@ class RestaurantPhotos extends React.Component {
     // //If the current index is not 0, decrement the currentArray
     // //If it is zero, change index to be last element of array
     // const { currentModalIndex } = this.state
+    const { currentModalIndex } = this.state;
+    const { photos } = this.props;
 
     if (currentModalIndex !== 0) {
+      console.log(currentModalIndex, 'currentModalIndex for previous');
       currentModalIndex--;
       this.setState({ currentModalIndex })
     } else {
-      this.setState({ currentModalIndex: photoLength })
+      this.setState({ currentModalIndex: photos.length })
     }
   }
 
@@ -72,8 +75,10 @@ class RestaurantPhotos extends React.Component {
     //If it's at the end, next index should be 0
     //If it's not at the end, increment index
     // const { currentModalIndex } = this.state
+    const { currentModalIndex } = this.state;
+    const { photos } = this.props;
 
-    if (currentModalIndex !== photoLength) {
+    if (currentModalIndex !== photos.length) {
       currentModalIndex++;
       this.setState({ currentModalIndex })
     } else {
