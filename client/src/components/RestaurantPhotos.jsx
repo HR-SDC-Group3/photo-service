@@ -8,55 +8,99 @@ class RestaurantPhotos extends React.Component {
     this.state = {
       showModal: false,
       currentModal: '',
-      headerStyleToDisplay: [0, 10],
+      currentModalIndex: null,
+      headerStyleToDisplay: [0, 10], //Run a random check in the beginning, set value to currentRestHeader
+      // currentRestaurantHeader: //fixed value
     }
-    this.openModal = this.openModal.bind(this);
+    // this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
-    this.generateHeaderView = this.generateHeaderView.bind(this);
-    this.generateRandomIndex = this.generateRandomIndex.bind(this);
+    this.previous = this.previous.bind(this);
+    this.next = this.next.bind(this);
+    // this.generateHeaderView = this.generateHeaderView.bind(this);
+    // this.generateRandomIndex = this.generateRandomIndex.bind(this);
   }
 
-  // toggleModal should bring up a modal window with the Modal that was clicked on being the 
-  // centerpiece
+  //Explore componentdidmount to set curr restaurant header to 0 or 10. 
 
-  openModal(event) {
+  //Grabs photo that was clicked and set's it as main modal. 
+  openModal(index, event) {
     let modalImage = event.target.src;
     modalImage = modalImage.replace('thumbnails', 'large_photos');
     modalImage = modalImage.replace('_small', '_large');
 
-    this.setState(prevState => ({
+    // this.setState(prevState => ({
+    //   showModal: true,
+    //   currentModal: modalImage,
+    //   currentModalIndex: index,
+    // }))
+    this.setState({
       showModal: true,
-      currentModal: modalImage
-    }))
-
+      currentModal: modalImage,
+      currentModalIndex: index,
+    })
   }
 
   closeModal() {
-    this.setState(prevState => ({
+    // this.setState(prevState => ({
+    //   showModal: false,
+    //   currentModal: '',
+    //   currentModalIndex: 0,
+    // }))
+    this.setState({
       showModal: false,
-      currentModal: ''
-    }))
+      currentModal: '',
+      currentModalIndex: 0,
+    })
+
   }
 
-  generateHeaderView() {
-    return Math.round(Math.random());
+  previous() {
+    // //If the current index is not 0, decrement the currentArray
+    // //If it is zero, change index to be last element of array
+    // const { currentModalIndex } = this.state
+
+    if (currentModalIndex !== 0) {
+      currentModalIndex--;
+      this.setState({ currentModalIndex })
+    } else {
+      this.setState({ currentModalIndex: photoLength })
+    }
   }
 
-  generateRandomIndex() {
-    return Math.round(Math.random() * 22 + 1)
+  next() {
+    //Check if the current index is not at the end of the array
+    //If it's at the end, next index should be 0
+    //If it's not at the end, increment index
+    // const { currentModalIndex } = this.state
+
+    if (currentModalIndex !== photoLength) {
+      currentModalIndex++;
+      this.setState({ currentModalIndex })
+    } else {
+      this.setState({ currentModalIndex: 0 })
+    }
   }
+
+  // generateHeaderView() {
+  //   return Math.round(Math.random());
+  // }
+
+  // generateRandomIndex() {
+  //   return Math.round(Math.random() * 22 + 1)
+  // }
 
   render() {
     // OpenTable restaurants seem to be making a photo carousel of either 1 restaurant entry
     // or 10. Therefore, photo entries must be either 1 or 10, to be displayed to the user
-
     const { photos, isLoading } = this.props
-    const { showModal, currentModal, headerStyleToDisplay } = this.state
+    const { showModal, currentModal } = this.state
     const numberToString = {
       0: 'zero', 1: 'one', 2: 'two', 3: 'three', 4: 'four', 5: 'five',
       6: 'six', 7: 'seven', 8: 'eight', 9: 'nine'
     }
 
+    //Need to conditionally render 1 or 10 photos, depending on what was calculated in the beginning. 
+    //Keep it static on componentDidMount, and don't change the state
     if (isLoading) {
       return (
         <div>
@@ -64,30 +108,26 @@ class RestaurantPhotos extends React.Component {
             const photosToBeDisplayed = restaurant.userPhotos.slice(0, 10);
             return photosToBeDisplayed.map((photo, index) => {
               return (
-                <li id={numberToString[index]}><img src={photo.photoThumbnail} key={index} onClick={this.openModal}></img></li>
+                <li id={numberToString[index]}>
+                  <img src={photo.photoThumbnail}
+                    key={index}
+                    onClick={this.openModal.bind(this, index)}></img>
+                </li>
               )
-            })
+            });
           })}
-          {showModal ? <Modal onClose={this.closeModal} modalImage={currentModal} photos={photos} /> : null}
+          {showModal ? <Modal onClose={this.closeModal}
+            modalImage={currentModal}
+            photos={photos}
+            // currentModalIndex={currentModalIndex}
+            onPrevious={this.previous}
+            onNext={this.next} /> : null}
         </div>
       )
     } else {
       return <h1>Loading...</h1>
     }
   }
-
 }
 
 export default RestaurantPhotos;
-
-// /*
-// Current bug is whenever I click on the close button, my entire page gets re-rendered 
-// and all of the re-runs again. 
-
-// When the unit closes, it must revert back to it's current state. 
-
-
-// For styling, what if I just made a bunch of divs and then styled each div to contain 
-
-// */
-
