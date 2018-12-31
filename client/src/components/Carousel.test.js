@@ -5,7 +5,6 @@ import Adaptor from 'enzyme-adapter-react-16';
 describe('<CarouselContainer />', () => {
   it('Renders a Carousel container component instance', () => {
     const carousel = shallow(<CarouselContainer />);
-    expect(carousel.to.)
   });
   it('Should render user photos as children', () => {
 
