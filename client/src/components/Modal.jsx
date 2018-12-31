@@ -1,53 +1,69 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 
-const Modal = (props) => {
+const modalRoot = document.getElementById('modal-root')
 
-  const backdropStyle = {
-    position: 'fixed',
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
-    zIndex: 99,
-    backgroundColor: '#f7f7f7',
-    padding: 50,
+const backgroundStyle = {
+  position: 'absolute',
+  top: '0',
+  bottom: '0',
+  left: '0',
+  right: '0',
+  display: 'grid',
+  justifyContent: 'center',
+  alignItems: 'center',
+  backgroundColor: 'rgba(0,0,0,0.3)',
+}
+
+const modalStyle = {
+  padding: 20,
+  background: '#fff',
+  borderRadius: '2px',
+  display: 'inline-block',
+  minHeight: '500px',
+  margin: '1rem',
+  postion: 'relative',
+  minWidth: '700px',
+  boxShadow: '0 3px 6px rgba(0,0,0,0.16) 0 3px 6px rgba(0,0,0,0.23)',
+  justifySelf: 'center',
+}
+
+const imageStyle = {
+  marginLeft: 'auto',
+  marginRight: 'auto',
+}
+
+
+class Modal extends React.Component {
+  constructor(props) {
+    super(props);
   }
-  const imageStyle = {
-    marginLeft: 'auto',
-    marginRight: 'auto',
+
+  el = document.createElement('div')
+
+  //Adds the portal 
+  componentDidMount() {
+    modalRoot.appendChild(this.el)
   }
 
-  const modalStyle = {
-    backgroundColor: '#fff',
-    borderRadius: 5,
-    maxWidth: 500,
-    minHeight: 400,
-    margin: '0 auto',
-    padding: 30,
-    position: 'relative',
+  componentWillUnmount() {
+    modalRoot.removeChild(this.el)
   }
 
-  const footerStyle = {
-    position: 'absolute',
-    margin: '0 auto',
-  }
+  render() {
+    const { onClose, modalImage } = this.props;
+    console.log(this.props.modalImage);
 
-  return (
-    <div style={backdropStyle}>
-      <div style={modalStyle}>
-        <button onClick={props.onClick}>Close</button>
-        <img src={props.currentModal} style={imageStyle} id="carousel-modal"></img>
-        <div style={footerStyle}>
-          <br></br>
-          <div><span className="carousel-description">{userPhoto.description}</span></div>
-          <div><span className="carousel-username">{userPhoto.username}</span></div>
-          <div><span className="carousel-date">{userPhoto.date}</span></div>
-          <a href="#">&#10094; Previous</a>
-          <a href="#">Next &#10095;</a>
+    return ReactDOM.createPortal(
+      <div style={backgroundStyle}>
+        <div style={modalStyle}>
+          <img src={modalImage} style={imageStyle}></img>
+          <button onClick={onClose}>Close</button>
         </div>
-      </div>
-    </div>
-  )
+      </div>,
+      this.el
+    )
+  }
 }
 
 export default Modal;

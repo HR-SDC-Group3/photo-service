@@ -1,7 +1,7 @@
 import React from 'react';
 import url from 'url';
 import RestaurantPhotos from './RestaurantPhotos.jsx';
-import Axios from 'axios';
+import axios from 'axios';
 
 class Carousel extends React.Component {
   constructor(props) {
@@ -10,10 +10,11 @@ class Carousel extends React.Component {
       restaurantPhotos: null,
       isLoading: false,
     }
+    this.getPhotos = this.getPhotos.bind(this);
   }
 
-  componentDidMount() {
-    Axios.get('/photos/restaurants/')
+  getPhotos() {
+    axios.get(`/photos/restaurants/`)
       .then((response) => {
         this.setState((currentState) => {
           return {
@@ -25,6 +26,10 @@ class Carousel extends React.Component {
       .catch((error) => {
         console.log('Error fetching data');
       })
+  }
+
+  componentDidMount() {
+    this.getPhotos();
   }
 
   render() {
