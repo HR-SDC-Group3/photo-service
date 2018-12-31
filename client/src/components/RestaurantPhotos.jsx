@@ -28,11 +28,13 @@ class RestaurantPhotos extends React.Component {
       showModal: true,
       currentModal: modalImage
     }))
+
   }
 
   closeModal() {
     this.setState(prevState => ({
-      showModal: false
+      showModal: false,
+      currentModal: ''
     }))
   }
 
@@ -46,40 +48,46 @@ class RestaurantPhotos extends React.Component {
 
   render() {
     // OpenTable restaurants seem to be making a photo carousel of either 1 restaurant entry
-    // or 10. Therefore, photo entries must be either 1 or 10, to be displayed to the user 
+    // or 10. Therefore, photo entries must be either 1 or 10, to be displayed to the user
 
     const { photos, isLoading } = this.props
-    const { showModal, currentModal, amountToRender, headerStyleToDisplay } = this.state
+    const { showModal, currentModal, headerStyleToDisplay } = this.state
+    const numberToString = {
+      0: 'zero', 1: 'one', 2: 'two', 3: 'three', 4: 'four', 5: 'five',
+      6: 'six', 7: 'seven', 8: 'eight', 9: 'nine'
+    }
 
-    if ((isLoading) && (headerStyleToDisplay[this.generateHeaderView()] === 10)) {
+    if (isLoading) {
       return (
         <div>
           {photos.map((restaurant, index) => {
             const photosToBeDisplayed = restaurant.userPhotos.slice(0, 10);
             return photosToBeDisplayed.map((photo, index) => {
               return (
-                <li><img src={photo.photoThumbnail} key={index} onClick={this.openModal}></img></li>
+                <li id={numberToString[index]}><img src={photo.photoThumbnail} key={index} onClick={this.openModal}></img></li>
               )
             })
           })}
-          {this.state.showModal ? <Modal onClose={this.closeModal} modalImage={this.state.currentModal} /> : null}
-        </div>
-      )
-    } else if ((isLoading) && (headerStyleToDisplay[this.generateHeaderView()] === 0)) {
-      return (
-        // Still only displaying bone marrow. Requires fixing later //
-        <div>
-          {photos.map((restaurant, index) => {
-            const headerToDisplay = _.find(restaurant.userPhotos, (userPhoto) => { return userPhoto[index] = this.generateRandomIndex() })
-            return <img src={headerToDisplay.photoURL} id="carousel-header"></img>
-          })
-          }
+          {showModal ? <Modal onClose={this.closeModal} modalImage={currentModal} photos={photos} /> : null}
         </div>
       )
     } else {
       return <h1>Loading...</h1>
     }
   }
+
 }
 
 export default RestaurantPhotos;
+
+// /*
+// Current bug is whenever I click on the close button, my entire page gets re-rendered 
+// and all of the re-runs again. 
+
+// When the unit closes, it must revert back to it's current state. 
+
+
+// For styling, what if I just made a bunch of divs and then styled each div to contain 
+
+// */
+
