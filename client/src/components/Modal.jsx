@@ -3,12 +3,6 @@ import ReactDOM from 'react-dom';
 
 const modalRoot = document.getElementById('modal-root')
 
-//Current props being sent down
-//modalImage = current modal image
-//photoArray = Saratoga's photo array
-//modalIndex = index of the modal
-//length = get the length of the photoArray
-
 class Modal extends React.Component {
   constructor(props) {
     super(props)
@@ -26,49 +20,30 @@ class Modal extends React.Component {
   }
 
   render() {
-    const { modalImage, onClose, photos, onNext, onPrevious } = this.props;
+    const { onClose, modalImage, photos, currentModalIndex, onNext, onPrevious } = this.props;
 
     return ReactDOM.createPortal(
       <div id="carousel-modal-bg">
-        {/* <button>Previous</button>
-        // <button>Next</button> */}
-        <button onClick={onPrevious}>Previous</button>
-        <button onClick={onNext}>Next</button>
+        <button onClick={onClose} id="close-btn">Close</button>
+        <button onClick={onPrevious} id="previous-btn">Previous</button>
+        <button onClick={onNext} id="next-btn">Next</button>
         <div id="carousel-modal-style">
-          <img src={modalImage}></img>
-          <button onClick={onClose}>Close</button>
+          {photos.map((restaurants) => {
+            const currentModal = restaurants.userPhotos.filter((restaurant, idx) => { return idx === currentModalIndex });
+            const parsedDate = currentModal[0].date.split(' ').slice(0, 4).join(' ');
+            return (
+              <div>
+                <div id="carousel-modal"><img src={currentModal[0].photoURL}></img></div>
+                <div id="carousel-description">{currentModal[0].photo_description}</div>
+                <div id="carousel-date">{parsedDate}</div>
+                <div id="carousel-user">{currentModal[0].username}</div>
+              </div>
+            )
+          })}
         </div>
-      </div>,
+      </div >,
       this.el
     )
-
-    //Don't need to map over the entire array, just take in the modal and the index passed in from the parent. 
-    // return ReactDOM.createPortal(
-    //   <div id="carousel-modal-bg">
-    //     <div id="carousel-modal-style">
-    //       {photos.map((restaurant) => {
-    //         return restaurant.userPhotos.map((photo, index) => {
-    //           const parsedDate = photo.date.split(' ').slice(0, 4).join(' ');
-    //           return (
-    //             // Need to pass in the index of the modalImage that was clicked on here. 
-    //             // From there, we load the array and set the pointer to that image that was clicked on
-    //             // Left button and right button can scroll through the photos
-    //             <div id="modal-scroller">
-    //               <li>
-    //                 <div id="carousel-modal"><img src={photo.photoURL} key={index}></img></div>
-    //                 <div id="carousel-description">{photo.photo_description}</div>
-    //                 <div id="carousel-date">{parsedDate}</div>
-    //                 <div id="carousel-user">{photo.username}</div>
-    //               </li>
-    //               <button onClick={onClose}>Close</button>
-    //             </div>
-    //           )
-    //         })
-    //       })}
-    //     </div>
-    //   </div>,
-    //   this.el
-    // )
   }
 }
 

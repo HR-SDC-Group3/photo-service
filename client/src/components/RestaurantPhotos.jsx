@@ -8,16 +8,13 @@ class RestaurantPhotos extends React.Component {
     this.state = {
       showModal: false,
       currentModal: '',
-      currentModalIndex: null,
+      currentModalIndex: 0,
       headerStyleToDisplay: [0, 10], //Run a random check in the beginning, set value to currentRestHeader
       // currentRestaurantHeader: //fixed value
     }
-    // this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.previous = this.previous.bind(this);
     this.next = this.next.bind(this);
-    // this.generateHeaderView = this.generateHeaderView.bind(this);
-    // this.generateRandomIndex = this.generateRandomIndex.bind(this);
   }
 
   //Explore componentdidmount to set curr restaurant header to 0 or 10. 
@@ -28,11 +25,6 @@ class RestaurantPhotos extends React.Component {
     modalImage = modalImage.replace('thumbnails', 'large_photos');
     modalImage = modalImage.replace('_small', '_large');
 
-    // this.setState(prevState => ({
-    //   showModal: true,
-    //   currentModal: modalImage,
-    //   currentModalIndex: index,
-    // }))
     this.setState({
       showModal: true,
       currentModal: modalImage,
@@ -41,17 +33,11 @@ class RestaurantPhotos extends React.Component {
   }
 
   closeModal() {
-    // this.setState(prevState => ({
-    //   showModal: false,
-    //   currentModal: '',
-    //   currentModalIndex: 0,
-    // }))
     this.setState({
       showModal: false,
       currentModal: '',
       currentModalIndex: 0,
     })
-
   }
 
   previous() {
@@ -62,11 +48,9 @@ class RestaurantPhotos extends React.Component {
     const { photos } = this.props;
 
     if (currentModalIndex !== 0) {
-      console.log(currentModalIndex, 'currentModalIndex for previous');
-      currentModalIndex--;
-      this.setState({ currentModalIndex })
+      this.setState({ currentModalIndex: this.state.currentModalIndex -= 1 })
     } else {
-      this.setState({ currentModalIndex: photos.length })
+      this.setState({ currentModalIndex: photos.length - 1 })
     }
   }
 
@@ -79,26 +63,17 @@ class RestaurantPhotos extends React.Component {
     const { photos } = this.props;
 
     if (currentModalIndex !== photos.length) {
-      currentModalIndex++;
-      this.setState({ currentModalIndex })
+      this.setState({ currentModalIndex: this.state.currentModalIndex += 1 })
     } else {
       this.setState({ currentModalIndex: 0 })
     }
   }
 
-  // generateHeaderView() {
-  //   return Math.round(Math.random());
-  // }
-
-  // generateRandomIndex() {
-  //   return Math.round(Math.random() * 22 + 1)
-  // }
-
   render() {
     // OpenTable restaurants seem to be making a photo carousel of either 1 restaurant entry
     // or 10. Therefore, photo entries must be either 1 or 10, to be displayed to the user
     const { photos, isLoading } = this.props
-    const { showModal, currentModal } = this.state
+    const { showModal, currentModal, currentModalIndex } = this.state
     const numberToString = {
       0: 'zero', 1: 'one', 2: 'two', 3: 'three', 4: 'four', 5: 'five',
       6: 'six', 7: 'seven', 8: 'eight', 9: 'nine'
@@ -109,7 +84,7 @@ class RestaurantPhotos extends React.Component {
     if (isLoading) {
       return (
         <div>
-          {photos.map((restaurant, index) => {
+          {photos.map((restaurant) => {
             const photosToBeDisplayed = restaurant.userPhotos.slice(0, 10);
             return photosToBeDisplayed.map((photo, index) => {
               return (
@@ -124,7 +99,7 @@ class RestaurantPhotos extends React.Component {
           {showModal ? <Modal onClose={this.closeModal}
             modalImage={currentModal}
             photos={photos}
-            // currentModalIndex={currentModalIndex}
+            currentModalIndex={currentModalIndex}
             onPrevious={this.previous}
             onNext={this.next} /> : null}
         </div>
