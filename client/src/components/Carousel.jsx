@@ -2,6 +2,7 @@ import React from 'react';
 import url from 'url';
 import RestaurantPhotos from './RestaurantPhotos.jsx';
 import axios from 'axios';
+// import styled from './styles/CarouselStyles.jsx';
 
 class Carousel extends React.Component {
   constructor(props) {
@@ -13,7 +14,9 @@ class Carousel extends React.Component {
     this.getPhotos = this.getPhotos.bind(this);
   }
 
-  getPhotos() {
+  //USE URL PARSER TO GET URL ID
+  //axios.get(`/photos/restaurants/${id}`)
+  getPhotos(id) {
     axios.get(`/photos/restaurants/`)
       .then((response) => {
         this.setState((currentState) => {
@@ -29,14 +32,16 @@ class Carousel extends React.Component {
   }
 
   componentDidMount() {
+    // let url = new url(window.location.href);
+    // let id = url.pathname.split('/')[2];
     this.getPhotos();
   }
 
   render() {
     return (
-      <div className="carousel-container" >
+      <div>
         <RestaurantPhotos photos={this.state.restaurantPhotos} isLoading={this.state.isLoading} />
-      </div >
+      </div>
     )
   }
 }
