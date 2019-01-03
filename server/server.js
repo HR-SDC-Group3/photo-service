@@ -6,15 +6,14 @@ const app = express();
 
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: true }));
-app.use(express.static('client/dist/'));
+app.use('/restaurants/:id', express.static('client/dist/'));
 
+app.get('/api/restaurants/:id/photos', (req, res) => {
+  const restaurantId = req.params.id;
 
-//
-// const id = req.params.id;
-app.get('/photos/restaurants/', (req, res) => {
-  db.find((err, response) => {
+  db.find(restaurantId, (err, response) => {
     if (err) {
-      console.log(err, 'error getting response from database');
+      throw err;
     } else {
       res.status(200);
       res.send(response);

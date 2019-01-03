@@ -90,64 +90,36 @@ class RestaurantPhotos extends React.Component {
       0: 'zero', 1: 'one', 2: 'two', 3: 'three', 4: 'four', 5: 'five',
       6: 'six', 7: 'seven', 8: 'eight', 9: 'nine'
     }
-
     if (isLoading) {
       return (
         <div className="carousel-container-grid">
           {photos.map((restaurant) => {
             const photosToBeDisplayed = restaurant.userPhotos.slice(0, 14);
             return photosToBeDisplayed.map((photo, index) => {
-              // For every odd element, make two divs to store sto photos
-              if (index % 2 !== 0) {
-                //make two divs
-                return (
-                  <div>
-                    <div id={numberToString[index]}><li><img src={photo.photoThumbnail} key={index} onClick={this.openModal.bind(this, index)}></img></li></div>
-                    <div id={numberToString[index + 1]}><li><img src={photo.photoThumbnail} key={index + 1} onClick={this.openModal.bind(this, index + 1)}></img></li></div>
-                  </div>
-                )
-              } else {
-                //make one div
-                <div id={numberToString[index]}><li><img src={photo.photoThumbnail} key={index} onClick={this.openModal.bind(this, index)}></img></li></div>
-              }
-            })
+              return (
+                <li id={numberToString[index]}>
+                  {/* <div className="carousel-image"> */}
+                  <img src={photo.photoThumbnail}
+                    key={index}
+                    onClick={this.openModal.bind(this, index)}></img>
+                  {/* </div> */}
+                </li>
+              )
+            });
           })}
+          {showModal ? <Modal onClose={this.closeModal}
+            modalImage={currentModal}
+            photos={photos}
+            currentModalIndex={currentModalIndex}
+            onPrevious={this.previous}
+            onNext={this.next} /> : null}
         </div>
       )
     } else {
       return <h1>Loading...</h1>
     }
-
-    //   if (isLoading) {
-    //     return (
-    //       <div className="carousel-container-grid">
-    //         {photos.map((restaurant) => {
-    //           const photosToBeDisplayed = restaurant.userPhotos.slice(0, 14);
-    //           return photosToBeDisplayed.map((photo, index) => {
-    //             return (
-    //               <li id={numberToString[index]}>
-    //                 {/* <div className="carousel-image"> */}
-    //                 <img src={photo.photoThumbnail}
-    //                   key={index}
-    //                   onClick={this.openModal.bind(this, index)}></img>
-    //                 {/* </div> */}
-    //               </li>
-    //             )
-    //           });
-    //         })}
-    //         {showModal ? <Modal onClose={this.closeModal}
-    //           modalImage={currentModal}
-    //           photos={photos}
-    //           currentModalIndex={currentModalIndex}
-    //           onPrevious={this.previous}
-    //           onNext={this.next} /> : null}
-    //       </div>
-    //     )
-    //   } else {
-    //     return <h1>Loading...</h1>
-    //   }
-    // }}
   }
 }
+
 
 export default RestaurantPhotos;

@@ -1,5 +1,5 @@
 import React from 'react';
-import url from 'url';
+import url from 'url-parse';
 import RestaurantPhotos from './RestaurantPhotos.jsx';
 import axios from 'axios';
 // import styled from './styles/CarouselStyles.jsx';
@@ -14,10 +14,8 @@ class Carousel extends React.Component {
     this.getPhotos = this.getPhotos.bind(this);
   }
 
-  //USE URL PARSER TO GET URL ID
-  //axios.get(`/photos/restaurants/${id}`)
   getPhotos(id) {
-    axios.get(`/photos/restaurants/`)
+    axios.get(`http://localhost:3003/api/restaurants/${id}/photos`)
       .then((response) => {
         this.setState((currentState) => {
           return {
@@ -32,9 +30,8 @@ class Carousel extends React.Component {
   }
 
   componentDidMount() {
-    // let url = new url(window.location.href);
-    // let id = url.pathname.split('/')[2];
-    this.getPhotos();
+    const id = window.location.pathname.split('/')[2];
+    this.getPhotos(id);
   }
 
   render() {

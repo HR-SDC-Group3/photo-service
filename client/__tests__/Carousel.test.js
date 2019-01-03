@@ -21,8 +21,4 @@ describe('<Carousel />', () => {
     const apiData = await testFunctions.axiosGetError();
     expect(apiData).toEqual('Error!');
   });
-
-  // it('Passes down props to RestaurantList component', () => {
-
-  // });
 });
