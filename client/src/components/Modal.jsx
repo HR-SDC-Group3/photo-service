@@ -10,7 +10,6 @@ class Modal extends React.Component {
 
   el = document.createElement('div');
 
-  //Mount portal entry
   componentDidMount() {
     modalRoot.appendChild(this.el)
   }
