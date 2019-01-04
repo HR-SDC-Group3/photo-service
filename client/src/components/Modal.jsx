@@ -3,45 +3,13 @@ import ReactDOM from 'react-dom';
 
 const modalRoot = document.getElementById('modal-root')
 
-const backgroundStyle = {
-  position: 'absolute',
-  top: '0',
-  bottom: '0',
-  left: '0',
-  right: '0',
-  display: 'grid',
-  justifyContent: 'center',
-  alignItems: 'center',
-  backgroundColor: 'rgba(0,0,0,0.3)',
-}
-
-const modalStyle = {
-  padding: 20,
-  background: '#fff',
-  borderRadius: '2px',
-  display: 'inline-block',
-  minHeight: '500px',
-  margin: '1rem',
-  postion: 'relative',
-  minWidth: '700px',
-  boxShadow: '0 3px 6px rgba(0,0,0,0.16) 0 3px 6px rgba(0,0,0,0.23)',
-  justifySelf: 'center',
-}
-
-const imageStyle = {
-  marginLeft: 'auto',
-  marginRight: 'auto',
-}
-
-
 class Modal extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
   }
 
-  el = document.createElement('div')
+  el = document.createElement('div');
 
-  //Adds the portal 
   componentDidMount() {
     modalRoot.appendChild(this.el)
   }
@@ -51,16 +19,29 @@ class Modal extends React.Component {
   }
 
   render() {
-    const { onClose, modalImage } = this.props;
-    console.log(this.props.modalImage);
+    const { onClose, modalImage, photos, currentModalIndex, onNext, onPrevious } = this.props;
 
     return ReactDOM.createPortal(
-      <div style={backgroundStyle}>
-        <div style={modalStyle}>
-          <img src={modalImage} style={imageStyle}></img>
-          <button onClick={onClose}>Close</button>
+      <div id="carousel-modal-bg">
+
+        <button onClick={onClose} id="close-btn">Close</button>
+        <button onClick={onPrevious} id="prev-Btn"><span>&#60;</span></button>
+        <button onClick={onNext} id="next-Btn"><span>&#62;</span></button>
+        <div id="carousel-modal-style">
+          {photos.map((restaurants) => {
+            const currentModal = restaurants.userPhotos.filter((restaurant, idx) => { return idx === currentModalIndex });
+            const parsedDate = currentModal[0].date.split(' ').slice(0, 4).join(' ');
+            return (
+              <div>
+                <div id="carousel-modal"><img src={currentModal[0].photoURL}></img></div>
+                <div id="carousel-description">{currentModal[0].photo_description}</div>
+                <div id="carousel-date">{parsedDate}</div>
+                <div id="carousel-user">{currentModal[0].username}</div>
+              </div>
+            )
+          })}
         </div>
-      </div>,
+      </div >,
       this.el
     )
   }

@@ -11,10 +11,7 @@ describe('<RestaurantPhotos />', () => {
 
   it('Should display photos if loading screen is not present', () => {
     const wrapper = shallow(<RestaurantPhotos isLoading={true} />);
-    expect(wrapper.find('img')).to
-  })
-
-  it('Should have isLoading and photos as it\'s props', () => {
+    expect(wrapper.find('img')).toBe(true);
   })
 
   it('Should receive a handler function from Carousel parent', () => {

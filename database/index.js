@@ -24,17 +24,17 @@ const saveRestaurant = (obj) => {
   const restaurant = new Restaurant(obj);
   restaurant.save((err) => {
     if (err) {
-      console.log('Error saving to Database');
+      throw err;
     } else {
       console.log('Successfully saved to database');
     }
   });
 };
 
-const find = (callback) => {
-  Restaurant.find({ _id: 0 }, (err, res) => {
+const find = (id, callback) => {
+  Restaurant.find({ _id: id }, (err, res) => {
     if (err) {
-      console.log('error finding restaurant', err);
+      throw err;
     } else {
       callback(null, res);
     }

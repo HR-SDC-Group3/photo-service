@@ -1,5 +1,4 @@
 import React from 'react';
-import url from 'url';
 import RestaurantPhotos from './RestaurantPhotos.jsx';
 import axios from 'axios';
 
@@ -13,9 +12,10 @@ class Carousel extends React.Component {
     this.getPhotos = this.getPhotos.bind(this);
   }
 
-  getPhotos() {
-    axios.get(`/photos/restaurants/`)
+  getPhotos(id) {
+    axios.get(`http://localhost:3003/api/restaurants/${id}/photos`)
       .then((response) => {
+        console.log(response);
         this.setState((currentState) => {
           return {
             restaurantPhotos: response.data,
@@ -29,7 +29,8 @@ class Carousel extends React.Component {
   }
 
   componentDidMount() {
-    this.getPhotos();
+    const id = window.location.pathname.split('/')[2];
+    this.getPhotos(id);
   }
 
   render() {

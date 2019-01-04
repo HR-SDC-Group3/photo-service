@@ -8,6 +8,7 @@ module.exports = {
     '@babel/plugin-proposal-class-properties',
     '@babel/plugin-proposal-export-namespace-from',
     '@babel/plugin-proposal-throw-expressions',
-    'transform-es2015-modules-commonjs'
+    'transform-es2015-modules-commonjs',
+    'babel-plugin-styled-components',
   ],
 };
