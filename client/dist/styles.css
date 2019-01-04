@@ -1,24 +1,15 @@
+/* --------------------  CONTAINER AND MODAL STYLING  --------------------  */
 .carousel-container {
   font-family: Helvetica, sans-serif;
   text-align: center;
-  height: 32%;
-  width: 86%;
+  height: auto;
+  width: auto;
   margin-top: 5%;
   margin-left: auto;
   margin-right: auto;
   display: flex;
   flex-direction: column;
-  /* overflow: hidden; */
 }
-
-.carousel-tile {
-  display: flex;
-}
-
-li {
-  list-style-type: none;
-  display: inline-block;
-} 
 
 #carousel-modal-bg {
   position: absolute;
@@ -30,6 +21,24 @@ li {
   justify-content: center;
   align-items: center;
   background-color: rgba(0,0,0,0.3);
+}
+
+#next-Btn {
+  position: relative;
+  z-index: 999;
+  color: white;
+  right: -746px;
+  font-size: 40px;
+  cursor: pointer;
+}
+
+#prev-Btn {
+  position: relative;
+  left: 46px;
+  z-index: 999;
+  color: white;
+  font-size: 40px;
+  cursor: pointer;
 }
 
 #carousel-modal-style {
@@ -45,8 +54,10 @@ li {
   box-shadow: 0 3px 6px rgba(0,0,0,0.16) 0 3px 6px rgba(0,0,0,0.23)
 }
 
-.carousel-header {
-  width: 86%;
+/* --------------------  NAV BAR STYLING  --------------------  */
+
+.carousel-header-nav {
+  width: auto;
   margin-left: none;
   margin-right: auto;
   display: flex;
@@ -60,11 +71,44 @@ li {
   width: 157px;
   object-fit: contain;
   background-image: url('http://media.otstatic.com/img/logo-fb47603a815bb1cf3e89400ba14587f1.png');
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  overflow-y: hidden;
 }
 
-#carousel-location {
+#btn-location-radio-icon {
+  background-image: url('https://image.flaticon.com/icons/png/512/67/67347.png');
+  height: 50px;
+  width: 50px;
+}
+
+ol > li {
+  display: inline;
+}
+
+#location-one-btn {
+  
+}
+
+#right-arrow {
+
+}
+
+#location-one-btn {
+
+}
+
+#right-arrow {
+
+}
+
+#location-two-btn {
+
+}
+
+
+#carousel-location-nav {
   float: right;
+
 }
 
 #sign-up-btn {
@@ -105,6 +149,7 @@ li {
   background: none;
 }
 
+/* --------------------  LOWER NAV BAR STYLES  --------------------  */
 
 ol > li {
   list-style: none;
@@ -112,6 +157,6 @@ ol > li {
   float: left
 }
 
-#btn-location-radio {
-  background-image: url('https://image.flaticon.com/icons/png/512/67/67347.png')
+li {
+  list-style: none;
 }

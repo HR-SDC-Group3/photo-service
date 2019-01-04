@@ -35,9 +35,9 @@ class Carousel extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="carousel-container" >
         <RestaurantPhotos photos={this.state.restaurantPhotos} isLoading={this.state.isLoading} />
-      </div>
+      </div >
     )
   }
 }

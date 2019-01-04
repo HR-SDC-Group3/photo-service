@@ -2,7 +2,7 @@ import React from 'react';
 import Masonry from 'react-masonry-component';
 
 const masonryOptions = {
-  horizontalOrder: true,
+  horizontalOrder: false,
 }
 
 class Mosaic extends React.Component {
@@ -10,7 +10,7 @@ class Mosaic extends React.Component {
     const { photoArray, onClick } = this.props;
 
     const images = photoArray.map(photos => {
-      const photosToBeDisplayed = photos.userPhotos.slice(0, 16);
+      const photosToBeDisplayed = photos.userPhotos.slice(0, 10);
       return photosToBeDisplayed.map((photo, index) => {
         return (
           <li className="carousel-tile">

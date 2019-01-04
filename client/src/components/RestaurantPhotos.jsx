@@ -92,7 +92,7 @@ class RestaurantPhotos extends React.Component {
 
     if (isLoading) {
       return (
-        <div className="carousel-container">
+        <div>
           <Header />
           <Mosaic photoArray={photos} onClick={this.openModal} />
           <div>

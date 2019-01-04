@@ -2,19 +2,21 @@ import React from 'react';
 
 const Header = () => {
   return (
-    <div className="carousel-header">
-      <div>
-        <div id="carousel-logo"></div>
-        <div id="carousel-location-picker">
-          <button id="btn-location-one">San Francisco</button>
-          <button id="btn-location-radio"></button>
-          <button id="btn-location-one">San Francisco Area</button>
+    //Flex the items inside of the container
+    //If the span's don't work, try using div's
+    //Try having no button for button radio. Then button if needed
+    <React.Fragment>
+      <div className="carousel-header-nav">
+        <span id="carousel-logo"></span>
+        <div className="carousel-location-picker">
+          <span id="btn-location-radio-icon">Radio Icon</span>
+          <span id="location-one-btn">San Francisco Bay Area</span>
+          <span id="right-arrow">RIGHT ARROW</span>
+          <span id="location-two-btn">San Francisco </span>
+          <span id="dropdown-arrow">DROPDOWN ARROW</span>
         </div>
-        <button id="sign-up-btn">Sign up</button>
-        <button id="sign-in-btn">Sign in</button>
-        <button id="search-btn">&#128269;</button>
       </div>
-      <div id="carousel-location">
+      <div className="carousel-location-nav">
         <ol>
           <li>Home</li>
           <li>United States</li>
@@ -23,7 +25,7 @@ const Header = () => {
           <li>Nob Hill</li>
         </ol>
       </div>
-    </div>
+    </React.Fragment>
   )
 }
 

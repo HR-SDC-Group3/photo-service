@@ -26,8 +26,8 @@ class Modal extends React.Component {
       <div id="carousel-modal-bg">
 
         <button onClick={onClose} id="close-btn">Close</button>
-        <button onClick={onPrevious} id="previous-btn"><span>&#60;</span></button>
-        <button onClick={onNext} id="next-btn"><span>&#62;</span></button>
+        <button onClick={onPrevious} id="prev-Btn"><span>&#60;</span></button>
+        <button onClick={onNext} id="next-Btn"><span>&#62;</span></button>
         <div id="carousel-modal-style">
           {photos.map((restaurants) => {
             const currentModal = restaurants.userPhotos.filter((restaurant, idx) => { return idx === currentModalIndex });
