@@ -1,8 +1,6 @@
 import React from 'react';
-import url from 'url-parse';
 import RestaurantPhotos from './RestaurantPhotos.jsx';
 import axios from 'axios';
-// import styled from './styles/CarouselStyles.jsx';
 
 class Carousel extends React.Component {
   constructor(props) {
@@ -17,6 +15,7 @@ class Carousel extends React.Component {
   getPhotos(id) {
     axios.get(`http://localhost:3003/api/restaurants/${id}/photos`)
       .then((response) => {
+        console.log(response);
         this.setState((currentState) => {
           return {
             restaurantPhotos: response.data,

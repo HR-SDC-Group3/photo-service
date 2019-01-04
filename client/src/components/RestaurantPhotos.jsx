@@ -1,9 +1,10 @@
 import React from 'react';
 import Modal from './Modal.jsx';
 import _ from 'lodash';
+import Mosaic from './Mosaic.jsx';
+import Header from './Header.jsx';
 
 /*
-
 ------------------------------------- TO-DO ----------------------------------------------------
 OpenTable restaurants seem to be making a photo carousel of either 1 restaurant entry
 or 10. Therefore, photo entries must be either 1 or 10, to be displayed to the user
@@ -23,11 +24,10 @@ class RestaurantPhotos extends React.Component {
       currentModalIndex: 0,
       headerStyleToDisplay: [0, 10],
     }
-
-    this.closeModal = this.closeModal.bind(this);
     this.previous = this.previous.bind(this);
     this.next = this.next.bind(this);
     this.generateHeaderView = this.generateHeaderView.bind(this);
+    this.openModal = this.openModal.bind(this);
   }
 
   //Generates a fixed view based off of the number that was calculated
@@ -36,23 +36,26 @@ class RestaurantPhotos extends React.Component {
     this.setState({ restaurantHeader: headerStyleToDisplay[this.generateHeaderView()] })
   }
 
-  openModal(index, event) {
-    let modalImage = event.target.src;
-    modalImage = modalImage.replace('thumbnails', 'large_photos');
-    modalImage = modalImage.replace('_small', '_large');
+  openModal() {
+    // let modalImage = event.target.src;
+    // modalImage = modalImage.replace('thumbnails', 'large_photos');
+    // modalImage = modalImage.replace('_small', '_large');
+
+    // const modalIndex = event.target.dataset.id;
+    // console.log(modalIndex);
 
     this.setState({
       showModal: true,
-      currentModal: modalImage,
-      currentModalIndex: index,
+      // currentModal: modalImage,
+      // currentModalIndex: modalIndex,
     })
   }
 
   closeModal() {
     this.setState({
       showModal: false,
-      currentModal: '',
-      currentModalIndex: 0,
+      // currentModal: '',
+      // currentModalIndex: 0,
     })
   }
 
@@ -86,33 +89,20 @@ class RestaurantPhotos extends React.Component {
 
     const { photos, isLoading } = this.props
     const { showModal, currentModal, currentModalIndex } = this.state
-    const numberToString = {
-      0: 'zero', 1: 'one', 2: 'two', 3: 'three', 4: 'four', 5: 'five',
-      6: 'six', 7: 'seven', 8: 'eight', 9: 'nine'
-    }
+
     if (isLoading) {
       return (
-        <div className="carousel-container-grid">
-          {photos.map((restaurant) => {
-            const photosToBeDisplayed = restaurant.userPhotos.slice(0, 14);
-            return photosToBeDisplayed.map((photo, index) => {
-              return (
-                <li id={numberToString[index]}>
-                  {/* <div className="carousel-image"> */}
-                  <img src={photo.photoThumbnail}
-                    key={index}
-                    onClick={this.openModal.bind(this, index)}></img>
-                  {/* </div> */}
-                </li>
-              )
-            });
-          })}
-          {showModal ? <Modal onClose={this.closeModal}
-            modalImage={currentModal}
-            photos={photos}
-            currentModalIndex={currentModalIndex}
-            onPrevious={this.previous}
-            onNext={this.next} /> : null}
+        <div className="carousel-container">
+          <Header />
+          <Mosaic photoArray={photos} onClick={this.openModal} />
+          <div>
+            {showModal ? <Modal onClose={this.closeModal}
+              modalImage={currentModal}
+              photos={photos}
+              currentModalIndex={currentModalIndex}
+              onPrevious={this.previous}
+              onNext={this.next} /> : null}
+          </div>
         </div>
       )
     } else {
