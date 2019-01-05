@@ -28,6 +28,7 @@ const saveRestaurant = (obj) => {
       throw err;
     } else {
       console.log('Successfully saved to database');
+      db.close();
     }
   });
 };
