@@ -11,6 +11,10 @@
   flex-direction: column;
 }
 
+.carousel-container > li {
+  list-style: none;
+}
+
 #carousel-modal-bg {
   position: absolute;
   top: 0;
