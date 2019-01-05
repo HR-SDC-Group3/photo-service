@@ -95,25 +95,13 @@ table {
   width: 50px;
 }
 
-ol {
-  display: flex;
-  float: left;
-  padding: 0px;
-}
-
 #carousel-location-nav {
   float: right;
 }
 
 /* --------------------  LOWER NAV BAR STYLES  --------------------  */
 
-ol > li {
-  list-style: none;
-  display: flex;
-  float: left
-}
-
-li {
+#carousel-tile {
   list-style: none;
 }
 
