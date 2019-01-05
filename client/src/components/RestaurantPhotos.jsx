@@ -4,16 +4,6 @@ import _ from 'lodash';
 import Mosaic from './Mosaic.jsx';
 import Header from './Header.jsx';
 
-/*
-------------------------------------- TO-DO ----------------------------------------------------
-OpenTable restaurants seem to be making a photo carousel of either 1 restaurant entry
-or 10. Therefore, photo entries must be either 1 or 10, to be displayed to the user
-Need to conditionally render 1 or 10 photos, depending on what was calculated in the beginning. 
-Keep it static on componentDidMount, and don't change the state
-------------------------------------------------------------------------------------------------
-
-*/
-
 class RestaurantPhotos extends React.Component {
   constructor(props) {
     super(props);
@@ -28,34 +18,38 @@ class RestaurantPhotos extends React.Component {
     this.next = this.next.bind(this);
     this.generateHeaderView = this.generateHeaderView.bind(this);
     this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
   }
 
-  //Generates a fixed view based off of the number that was calculated
   componentDidMount() {
     const { headerStyleToDisplay } = this.state
     this.setState({ restaurantHeader: headerStyleToDisplay[this.generateHeaderView()] })
   }
 
   openModal() {
-    // let modalImage = event.target.src;
-    // modalImage = modalImage.replace('thumbnails', 'large_photos');
-    // modalImage = modalImage.replace('_small', '_large');
+    const { photos } = this.props
+    let modalImage = event.target.src;
+    let photosArray = photos[0].userPhotos;
 
-    // const modalIndex = event.target.dataset.id;
-    // console.log(modalIndex);
+    const currentIndex = _.findIndex(photosArray, (photo) => {
+      return photo.photoThumbnail === modalImage;
+    });
+
+    modalImage = modalImage.replace('thumbnails', 'large_photos');
+    modalImage = modalImage.replace('_small', '_large');
 
     this.setState({
       showModal: true,
-      // currentModal: modalImage,
-      // currentModalIndex: modalIndex,
+      currentModal: modalImage,
+      currentModalIndex: currentIndex,
     })
   }
 
   closeModal() {
     this.setState({
       showModal: false,
-      // currentModal: '',
-      // currentModalIndex: 0,
+      currentModal: '',
+      currentModalIndex: 0,
     })
   }
 
@@ -93,7 +87,7 @@ class RestaurantPhotos extends React.Component {
     if (isLoading) {
       return (
         <div>
-          <Header />
+          <Header /><br></br>
           <Mosaic photoArray={photos} onClick={this.openModal} />
           <div>
             {showModal ? <Modal onClose={this.closeModal}
