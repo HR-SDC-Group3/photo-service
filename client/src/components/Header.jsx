@@ -1,33 +1,30 @@
 import React from 'react';
 
+
+
 const Header = () => {
   return (
-    //Flex the items inside of the container
-    //If the span's don't work, try using div's
-    //Try having no button for button radio. Then button if needed
     <React.Fragment>
       <div className="carousel-header-nav">
-        <span id="carousel-logo"></span>
-        <div className="carousel-location-picker">
-          <span id="btn-location-radio-icon">Radio Icon</span>
-          <span id="location-one-btn">San Francisco Bay Area</span>
-          <span id="right-arrow">RIGHT ARROW</span>
-          <span id="location-two-btn">San Francisco </span>
-          <span id="dropdown-arrow">DROPDOWN ARROW</span>
-        </div>
-      </div>
-      <div className="carousel-location-nav">
-        <ol>
-          <li>Home</li>
-          <li>United States</li>
-          <li>San Francisco Bay Area</li>
-          <li>San Francisco</li>
-          <li>Nob Hill</li>
-        </ol>
+        <table>
+          <tr id="carousel-logo"></tr>
+          <tr className="radio-location">
+            <i class="fas fa-map-marker-alt" id="map-marker"></i>
+            <span id="location-one-btn">SF Bay Area city</span>
+            <i class="fas fa-chevron-circle-right" id="arrow-right"></i>
+            <span id="location-two-btn">SF Bay Area City</span>
+            <i class="fas fa-chevron-circle-down" id="arrow-down"></i>
+          </tr>
+          <tr id="filler"></tr>
+          <tr id="signIn-btn-container">
+            <button id="sign-up-btn">Sign Up</button>
+            <button id="sign-in-btn">Sign in</button>
+            <i class="fas fa-search"></i>
+          </tr>
+        </table>
       </div>
     </React.Fragment>
   )
 }
 
 export default Header;
-

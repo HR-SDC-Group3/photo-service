@@ -11,6 +11,10 @@
   flex-direction: column;
 }
 
+.carousel-container > li {
+  list-style: none;
+}
+
 #carousel-modal-bg {
   position: absolute;
   top: 0;
@@ -29,6 +33,7 @@
   color: white;
   right: -746px;
   font-size: 40px;
+  background-color: rgba(255, 255, 255, 0.9);
   cursor: pointer;
 }
 
@@ -38,6 +43,7 @@
   z-index: 999;
   color: white;
   font-size: 40px;
+  background-color: rgba(255, 255, 255, 0.9);
   cursor: pointer;
 }
 
@@ -55,6 +61,10 @@
 }
 
 /* --------------------  NAV BAR STYLING  --------------------  */
+
+table {
+  display: flex;
+}
 
 .carousel-header-nav {
   width: auto;
@@ -75,40 +85,57 @@
   overflow-y: hidden;
 }
 
+.radio-location {
+  padding: 10px;
+}
+
+#filler {
+  width: 0%;
+}
+
 #btn-location-radio-icon {
   background-image: url('https://image.flaticon.com/icons/png/512/67/67347.png');
   height: 50px;
   width: 50px;
 }
 
-ol > li {
-  display: inline;
+#carousel-location-nav {
+  float: right;
+}
+
+/* --------------------  LOWER NAV BAR STYLES  --------------------  */
+
+#carousel-tile {
+  list-style: none;
+}
+
+.photo-description {
+  display: flex;
+}
+
+.photo-description > div {
+  float: right;
+}
+
+/* --------------------  BUTTONS  --------------------  */
+
+#arrow-down #arrow-right {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+#map-marker {
+  font-size: 28px;
+  margin-right: 10px;
 }
 
 #location-one-btn {
-  
-}
-
-#right-arrow {
-
-}
-
-#location-one-btn {
-
-}
-
-#right-arrow {
-
+  margin-right: 5px;
 }
 
 #location-two-btn {
-
-}
-
-
-#carousel-location-nav {
-  float: right;
-
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 #sign-up-btn {
@@ -116,7 +143,12 @@ ol > li {
   height: 30px;
   width: 70px;
   font-family: 'Source Sans Pro', sans-serif;
-  font-size: 20px: 
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+#signIn-btn-container {
+  margin-left: 144px;
 }
 
 #sign-in-btn {
@@ -131,32 +163,19 @@ ol > li {
   background: #fff;
 }
 
-/* #close-btn {
-  position: absolute;
-} */
-
-#previous-btn {
-  float: left;
+#prev-btn {
+  font-size: 20px
 }
 
 #next-btn {
-  float: right;
+  font-size: 20px;
 }
 
 #btn-location-one #btn-location-two {
   font-family: 'Source Sans Pro', sans-serif;
   border: none;
   background: none;
+  margin: 10px;
+  font-size: 20px;
 }
 
-/* --------------------  LOWER NAV BAR STYLES  --------------------  */
-
-ol > li {
-  list-style: none;
-  display: flex;
-  float: left
-}
-
-li {
-  list-style: none;
-}

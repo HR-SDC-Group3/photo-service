@@ -23,10 +23,6 @@ class Modal extends React.Component {
 
     return ReactDOM.createPortal(
       <div id="carousel-modal-bg">
-
-        <button onClick={onClose} id="close-btn">Close</button>
-        <button onClick={onPrevious} id="prev-Btn"><span>&#60;</span></button>
-        <button onClick={onNext} id="next-Btn"><span>&#62;</span></button>
         <div id="carousel-modal-style">
           {photos.map((restaurants) => {
             const currentModal = restaurants.userPhotos.filter((restaurant, idx) => { return idx === currentModalIndex });
@@ -37,6 +33,11 @@ class Modal extends React.Component {
                 <div id="carousel-description">{currentModal[0].photo_description}</div>
                 <div id="carousel-date">{parsedDate}</div>
                 <div id="carousel-user">{currentModal[0].username}</div>
+                <div className="photo-description">
+                  <button onClick={onClose} id="close-btn">Close</button>
+                  <div onClick={onPrevious} className="fas fa-angle-left" id="prev-btn"></div>
+                  <div onClick={onNext} className="fas fa-angle-right" id="next-btn"></div>
+                </div>
               </div>
             )
           })}
