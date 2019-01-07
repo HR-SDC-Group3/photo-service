@@ -18,6 +18,15 @@
 ## Usage
 
 > Some usage instructions
+```
+Run npm install to install dependencies
+Start MongoDB/Mongoose
+Run npm run seed to seed database
+Run npm start nodemon to boot up server
+Run npm start react-dev to start up webpack
+
+```
+
 
 ## Requirements
 
