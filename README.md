@@ -4,10 +4,10 @@
 
 ## Related Projects
 
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
+https://github.com/reserveMe/menu-cards-service
+https://github.com/reserveMe/photo-carousel-server
+https://github.com/reserveMe/reservation-calendar-service
+https://github.com/reserveMe/reviews-proxy
 
 ## Table of Contents
 
@@ -26,8 +26,6 @@ Run npm start nodemon to boot up server
 Run npm start react-dev to start up webpack
 
 ```
-
-
 ## Requirements
 
 An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
