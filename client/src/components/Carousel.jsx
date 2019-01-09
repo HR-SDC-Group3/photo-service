@@ -23,7 +23,7 @@ class Carousel extends React.Component {
         })
       })
       .catch((error) => {
-        console.log('Error fetching data');
+        console.log(error);
       })
   }
 
