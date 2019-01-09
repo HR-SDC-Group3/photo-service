@@ -10,7 +10,7 @@ app.use(bodyparser.urlencoded({ extended: true }));
 app.use('/restaurants/:id', express.static('client/dist/'));
 app.use(cors());
 
-app.get('/api/restaurants/:id/photos', (req, res) => {
+app.get('/api/restaurants/:id/', (req, res) => {
   const restaurantId = req.params.id;
 
   db.find(restaurantId, (err, response) => {
