@@ -1,8 +1,8 @@
 // Mongo connection // 
 const mongoose = require('mongoose');
 
-// mongoose.connect('mongodb://localhost/restaurant');
-mongoose.connect('mongodb://172.17.0.2:27017/restaurant');
+mongoose.connect('mongodb://localhost/restaurant');
+// mongoose.connect('mongodb://172.17.0.2:27017/restaurant');
 const db = mongoose.connection;
 
 const restaurantSchema = new mongoose.Schema({
