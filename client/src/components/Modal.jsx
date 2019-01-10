@@ -24,11 +24,11 @@ class Modal extends React.Component {
     return ReactDOM.createPortal(
       <div id="carousel-modal-bg">
         <div id="carousel-modal-style">
-          {photos.map((restaurants) => {
+          {photos.map((restaurants, i) => {
             const currentModal = restaurants.userPhotos.filter((restaurant, idx) => { return idx === currentModalIndex });
             const parsedDate = currentModal[0].date.split(' ').slice(0, 4).join(' ');
             return (
-              <div>
+              <div key={i}>
                 <div id="carousel-modal"><img src={currentModal[0].photoURL}></img></div>
                 <div id="carousel-description">{currentModal[0].photo_description}</div>
                 <div id="carousel-date">{parsedDate}</div>
