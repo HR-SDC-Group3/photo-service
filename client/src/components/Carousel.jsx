@@ -21,6 +21,7 @@ class Carousel extends React.Component {
             isLoading: !currentState.isLoading
           }
         })
+        console.log(this.state.restaurantPhotos)
       })
       .catch((error) => {
         console.log(error);

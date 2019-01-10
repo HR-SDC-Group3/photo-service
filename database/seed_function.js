@@ -56,7 +56,7 @@ const restaurantThumbnails = [
 
 const restaurants = [];
 
-// Generates an array of user photos and meta data //
+// Generates an array of user photos and meta data
 
 const generateUserPhotos = () => {
   const userPhotos = [];
@@ -75,9 +75,9 @@ const generateUserPhotos = () => {
 };
 
 
-// Builds out Restaurant Mongo schema with userPhotos array //
+// Builds out Restaurant Mongo schema with userPhotos array
 for (let i = 0; i < restaurantPhotos.length; i += 1) {
-  // Manually push in Saratoga restaurant //
+  // Manually push in Saratoga restaurant
   if (i === 0) {
     restaurants.push({
       _id: i,
@@ -93,7 +93,7 @@ for (let i = 0; i < restaurantPhotos.length; i += 1) {
   }
 }
 
-// Iterates over each document and saves to Mongo // 
+// Iterates over each document and saves to Mongo
 
 restaurants.forEach((restaurant) => {
   dbConnection.saveRestaurant(restaurant);
