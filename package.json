@@ -8,6 +8,7 @@
   },
   "scripts": {
     "server": "node ./database/seed_function.js && node server/server.js",
+    "start": "webpack -d --watch | nodemon server/server.js",
     "seed": "node ./database/seed_function.js",
     "react-dev": "webpack -d --watch",
     "nodemon": "nodemon server/server.js",
