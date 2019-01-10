@@ -40,8 +40,9 @@ app.post('/api/restaurants/:id/photos', (req, res) => {
 // UPDATE
 
 app.put('/api/restaurants/:id/photos', (req, res) => {
-  const restaurant = req.body;
-  db.updateRestaurant(restaurant).then(() => {
+  const id = req.params.id;
+  const photo = req.params.photo;
+  db.updateRestaurant(id, photo).then(() => {
     res.end();
   });
 });

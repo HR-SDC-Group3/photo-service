@@ -43,7 +43,19 @@ const find = (id, callback) => {
   });
 };
 
+const updateRestaurant = (id, photo, callback) => {
+  Restaurant.findOneAndUpdate({ _id: id }, {
+    $push: photo,
+  }, callback);
+};
+
+const deleteRestaurant = (id, callback) => {
+  Restaurant.deleteOne({ _id: id }, callback);
+};
+
 module.exports = {
   find,
   saveRestaurant,
+  updateRestaurant,
+  deleteRestaurant,
 };
