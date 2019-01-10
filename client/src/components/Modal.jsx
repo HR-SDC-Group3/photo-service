@@ -29,7 +29,7 @@ class Modal extends React.Component {
             const parsedDate = currentModal[0].date.split(' ').slice(0, 4).join(' ');
             return (
               <div key={i}>
-                <div id="carousel-modal"><img src={currentModal[0].photoURL}></img></div>
+                <div id="carousel-modal"><img src={currentModal[0].photoURL} className="carousel-modal-image"></img></div>
                 <div id="carousel-description">{currentModal[0].photo_description}</div>
                 <div id="carousel-date">{parsedDate}</div>
                 <div id="carousel-user">{currentModal[0].username}</div>
