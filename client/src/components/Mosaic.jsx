@@ -14,7 +14,7 @@ class Mosaic extends React.Component {
       return photosToBeDisplayed.map((photo, index) => {
         return (
           <li id="carousel-tile" key={index}>
-            <img src={photo.photoThumbnail} key={index} data-id={index} onClick={onClick} className="carousel-image"></img>
+            <img src={photo.photoURL} key={index} data-id={index} onClick={onClick} className="carousel-image"></img>
           </li>
         )
       });
