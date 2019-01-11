@@ -15,6 +15,11 @@
   list-style: none;
 }
 
+.carousel-image {
+  height: 160px;
+  width: 160px;
+}
+
 #carousel-modal-bg {
   position: absolute;
   top: 0;
@@ -25,6 +30,11 @@
   justify-content: center;
   align-items: center;
   background-color: rgba(0,0,0,0.3);
+}
+
+.carousel-modal-image {
+  width: 400px;
+  height: 400px;
 }
 
 #next-Btn {

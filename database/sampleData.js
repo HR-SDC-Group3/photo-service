@@ -1,4 +1,3 @@
-const data = [
   {
     "_id": 0,
     "name": "The Saratoga",
