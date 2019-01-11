@@ -2,7 +2,7 @@ const fs = require('fs');
 const faker = require('faker');
 const path = require('path');
 
-const entryCount = 100;
+const entryCount = 9999999;
 
 const progressLog = (index) => {
   if (index === 1) {
@@ -37,6 +37,7 @@ const progressLog = (index) => {
   }
   if (index === entryCount) {
     console.log('-------------------- SUCCESSFULLY WRITTEN');
+    console.timeEnd();
   }
 };
 
@@ -46,7 +47,10 @@ const stream = fs.createWriteStream(path.join(__dirname, '/data.csv'), { flags: 
 let i = 0;
 
 const writeData = () => {
-  while (i < entryCount) {
+  let proceed = true;
+  while (i <= entryCount && proceed) {
+    progressLog(i);
+
     const photos = [];
     for (let j = 0; j < 10; j += 1) {
       photos.push({
@@ -61,18 +65,16 @@ const writeData = () => {
       name: faker.company.companyName(),
       userPhotos: photos,
     };
-    if (!stream.write(JSON.stringify(entry) + '\n')) {
-      return;
-    }
+    proceed = stream.write(JSON.stringify(entry) + '\n');
     i += 1;
-    progressLog(i);
   }
-  stream.end();
-  console.timeEnd();
+
+  if (!proceed) {
+    stream.once('drain', () => {
+      writeData();
+    });
+  }
 };
 
-wstream.on('drain', () => {
-  writeData();
-});
 console.time();
 writeData();
