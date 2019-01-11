@@ -3,7 +3,7 @@ const dbConnection = require('./index.js');
 
 // S3 Asset's //
 const restaurantPhotos = [
-  'https://s3.amazonaws.com/reserve-me-photos/img1.jpg',
+  'https://s3-us-west-1.amazonaws.com/reserve-me-assets/large_photos/bonemarrow_large.jpg',
   'https://s3-us-west-1.amazonaws.com/reserve-me-assets/large_photos/cake_large.jpg',
   'https://s3-us-west-1.amazonaws.com/reserve-me-assets/large_photos/cheesepizza_large.jpg',
   'https://s3-us-west-1.amazonaws.com/reserve-me-assets/large_photos/chocolatecake_large.jpg',
@@ -29,7 +29,7 @@ const restaurantPhotos = [
 ];
 
 const restaurantThumbnails = [
-  'https://s3.amazonaws.com/reserve-me-thumbnails/img1.jpg',
+  'https://s3-us-west-1.amazonaws.com/reserve-me-assets/thumbnails/bonemarrow_small.jpg',
   'https://s3-us-west-1.amazonaws.com/reserve-me-assets/thumbnails/cake_small.jpg',
   'https://s3-us-west-1.amazonaws.com/reserve-me-assets/thumbnails/cheesepizza_small.jpg',
   'https://s3-us-west-1.amazonaws.com/reserve-me-assets/thumbnails/chocolatecake_small.jpg',
@@ -66,8 +66,8 @@ const generateUserPhotos = () => {
       photo_description: faker.lorem.sentence(),
       date: faker.date.recent(),
       username: faker.name.findName(),
-      photoURL: restaurantPhotos[0],
-      photoThumbnail: restaurantThumbnails[0],
+      photoURL: restaurantPhotos[i],
+      // photoThumbnail: restaurantThumbnails[i],
     };
     userPhotos.push(userPhoto);
   }
