@@ -4,7 +4,7 @@ const path = require('path');
 
 console.time('Task completed in ');
 
-const entryCount = 9999999;
+const entryCount = 99999999;
 
 const progressLog = (index) => {
   if (index === 1) {
@@ -78,43 +78,37 @@ const writeDataJSON = () => {
   }
 };
 
-let loopNum = 1;
-let currentIteration = 0;
-const maxChunks = 40;
-const chunkSize = 100;
-const writeDataCSV = (currentLoop) => {
-  if (currentLoop > maxChunks) {
-    console.timeEnd('Task completed in ');
-  }
-  let collectedWater = '';
-  if (currentLoop <= maxChunks) {
-    for (let k = 0; k < chunkSize; k += 1) {
-      const photos = [];
-      for (let j = 0; j < 10; j += 1) {
-        photos.push({
-          photo_description: faker.lorem.sentence(),
-          date: faker.date.recent(),
-          username: faker.name.findName(),
-          photoURL: `https://s3.amazonaws.com/large-photos/img${getRandomInt(1, 500)}.jpg`,
-        });
+let restaurantId = 0;
+
+const writeDataCSV = () => {
+  let proceed = true;
+
+  while (i <= entryCount && proceed) {
+    for (let j = 0; j < 10; j += 1) {
+      if (i === 0) {
+        proceed = stream.write('id,restaurant_id,restaurant_name,photo_description,date,username,photoURL\n');
       }
-      const entry = {
-        _id: currentIteration,
-        name: `restaurant${currentIteration}`,
-        userPhotos: photos,
-      };
-      currentIteration += 1;
-      collectedWater += JSON.stringify(entry) + '/n';
+      progressLog(i);
+      const entry = `${i},`
+                    + `${restaurantId},`
+                    + `restaurant${restaurantId},`
+                    + `${faker.lorem.sentence()},`
+                    + `${faker.date.recent()},`
+                    + `${faker.name.findName()},`
+                    + `https://s3.amazonaws.com/large-photos/img${getRandomInt(1, 500)}.jpg\n`;
+      proceed = stream.write(entry);
+      i += 1;
     }
-    fs.appendFile('./sdc_data.csv', collectedWater, (err) => {
-      if (err) { console.error(err); }
-      console.log(`Currently at loop ${currentLoop} of ${maxChunks}`);
-      loopNum += 1;
-      writeDataCSV(loopNum);
+    restaurantId += 1;
+  }
+
+  if (!proceed) {
+    stream.once('drain', () => {
+      writeDataCSV();
     });
   }
 };
 
 
-writeDataJSON();
-// writeDataCSV(loopNum);
+// writeDataJSON();
+writeDataCSV();

@@ -32,11 +32,8 @@ class RestaurantPhotos extends React.Component {
     let photosArray = photos[0].userPhotos;
 
     const currentIndex = _.findIndex(photosArray, (photo) => {
-      return photo.photoThumbnail === modalImage;
+      return photo.photoURL === modalImage;
     });
-
-    modalImage = modalImage.replace('small-photos', 'large-photos');
-    // modalImage = modalImage.replace('_small', '_large');
 
     this.setState({
       showModal: true,
