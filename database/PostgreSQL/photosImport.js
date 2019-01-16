@@ -19,7 +19,7 @@ const createPhotosTable = `
 `;
 
 const importPhotosData = () => {
-  const fileName = `${path.join(__dirname, '../dataSmall.csv')}`;
+  const fileName = `${path.join(__dirname, '../data.csv')}`;
   const copyString = `COPY photos(id,restaurant_id,restaurant_name,photo_description,date,username,photoURL) FROM '${fileName}' DELIMITER ',' CSV HEADER;`;
   client.query(copyString, (err) => {
     if (err) console.log(err);
@@ -36,3 +36,4 @@ client.connect()
   .then(() => console.log('------ beginning to import photos data'))
   .then(() => importPhotosData())
   .catch(err => console.log(err));
+// .then(() => client.query(`CREATE INDEX ${columnToIndex}_index ON ${currTable} (${columnToIndex})`))

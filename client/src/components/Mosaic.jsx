@@ -10,7 +10,7 @@ class Mosaic extends React.Component {
     const { photoArray, onClick } = this.props;
 
     const images = photoArray.map(photos => {
-      const photosToBeDisplayed = photos.userPhotos.slice(0, 8);
+      const photosToBeDisplayed = photos.userPhotos.slice(0, 7);
       return photosToBeDisplayed.map((photo, index) => {
         return (
           <li id="carousel-tile" key={index}>
