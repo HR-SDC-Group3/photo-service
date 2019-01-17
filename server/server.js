@@ -18,7 +18,6 @@ app.get('/api/restaurants/:id/photos', (req, res) => {
     if (err) {
       throw err;
     } else {
-      res.status(200);
       res.send(response);
     }
   });
@@ -52,9 +51,12 @@ app.put('/api/restaurants/:id/photos', (req, res) => {
 // DELETE
 
 app.delete('/api/restaurants/:id/photos', (req, res) => {
-  const restaurantId = req.params.id;
-  db.deleteRestaurant(restaurantId).then(() => {
-    res.end();
+  const id = req.params.id;
+  db.deleteRestaurant(id, (err, response) => {
+    if (err) {
+      throw err;
+    }
+    res.send(response);
   });
 });
 
