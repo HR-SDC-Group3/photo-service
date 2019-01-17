@@ -25,7 +25,6 @@ class Modal extends React.Component {
         <div id="carousel-modal-style">
            {photos.map((restaurants, i) => {
             const currentModal = restaurants.userPhotos.filter((restaurant, idx) => { return idx === currentModalIndex });
-            console.log(currentModal);
             const parsedDate = currentModal[0].date.split(' ').slice(0, 4).join(' ');
             return (
               <div key={i}>

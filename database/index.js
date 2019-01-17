@@ -15,22 +15,18 @@ const restaurantSchema = new mongoose.Schema({
       date: String,
       username: String,
       photoURL: String,
-      // photoThumbnail: String,
     },
   ],
 });
 
 const Restaurant = mongoose.model('Restaurant', restaurantSchema);
 
-const saveRestaurant = (obj) => {
-  const restaurant = new Restaurant(obj);
-  restaurant.save((err) => {
+const saveRestaurant = (req, callback) => {
+  Restaurant.create(req, (err, response) => {
     if (err) {
       throw err;
-    } else {
-      console.log('Successfully saved to database');
-      db.close();
     }
+    callback(null, response);
   });
 };
 
@@ -38,20 +34,31 @@ const find = (id, callback) => {
   Restaurant.find({ _id: id }, (err, res) => {
     if (err) {
       throw err;
-    } else {
-      callback(null, res);
     }
+    callback(null, res);
   });
 };
 
 const updateRestaurant = (id, photo, callback) => {
   Restaurant.findOneAndUpdate({ _id: id }, {
-    $push: photo,
-  }, callback);
+    $push: {
+      userPhotos: photo,
+    },
+  }, (err, res) => {
+    if (err) {
+      throw err;
+    }
+    callback(null, res);
+  });
 };
 
 const deleteRestaurant = (id, callback) => {
-  Restaurant.deleteOne({ _id: id }, callback);
+  Restaurant.deleteOne({ _id: id }, (err, res) => {
+    if (err) {
+      throw err;
+    }
+    callback(null, res);
+  });
 };
 
 module.exports = {
