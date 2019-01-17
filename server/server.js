@@ -18,7 +18,6 @@ app.get('/api/restaurants/:id/photos', (req, res) => {
     if (err) {
       throw err;
     } else {
-      res.status(200);
       res.send(response);
     }
   });
@@ -31,9 +30,8 @@ app.post('/api/restaurants/:id/photos', (req, res) => {
   db.saveRestaurant(restaurant, (err, response) => {
     if (err) {
       throw err;
-    } else {
-      res.send(response);
     }
+    res.send(response);
   });
 });
 
@@ -41,18 +39,24 @@ app.post('/api/restaurants/:id/photos', (req, res) => {
 
 app.put('/api/restaurants/:id/photos', (req, res) => {
   const id = req.params.id;
-  const photo = req.params.photo;
-  db.updateRestaurant(id, photo).then(() => {
-    res.end();
+  const photo = req.body;
+  db.updateRestaurant(id, photo, (err, response) => {
+    if (err) {
+      throw err;
+    }
+    res.send(response);
   });
 });
 
 // DELETE
 
 app.delete('/api/restaurants/:id/photos', (req, res) => {
-  const restaurantId = req.params.id;
-  db.deleteRestaurant(restaurantId).then(() => {
-    res.end();
+  const id = req.params.id;
+  db.deleteRestaurant(id, (err, response) => {
+    if (err) {
+      throw err;
+    }
+    res.send(response);
   });
 });
 
