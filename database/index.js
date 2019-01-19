@@ -36,7 +36,7 @@ const find = (id, callback) => {
       throw err;
     }
     callback(null, res);
-  });
+  }).lean();
 };
 
 const updateRestaurant = (id, photo, callback) => {
