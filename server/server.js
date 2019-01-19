@@ -1,4 +1,5 @@
 require('newrelic');
+
 const redisClient = require('redis').createClient;
 const express = require('express');
 const morgan = require('morgan');
