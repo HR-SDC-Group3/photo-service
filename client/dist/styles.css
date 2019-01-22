@@ -78,10 +78,9 @@ table {
 
 .carousel-header-nav {
   width: auto;
-  margin-left: none;
   margin-right: auto;
   display: flex;
-  justify-content: flex
+  height: 80px;
 }
 
 #carousel-logo {
@@ -165,7 +164,6 @@ table {
   height: ;
   border-style: none;
   border-bottom: ;
-
 }
 
 #search-btn {
