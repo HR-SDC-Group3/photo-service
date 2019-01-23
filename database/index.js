@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/restaurant', { useNewUrlParser: true }, () => {
+mongoose.connect('mongodb://54.215.254.109/restaurant', { useNewUrlParser: true }, () => {
   console.log('connected to mongo sdc');
 });
 // mongoose.connect('mongodb://172.17.0.2:27017/restaurant');

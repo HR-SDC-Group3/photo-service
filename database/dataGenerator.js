@@ -4,7 +4,7 @@ const path = require('path');
 
 console.time('Task completed in ');
 
-const entryCount = 99999999;
+const entryCount = 9999999;
 
 const progressLog = (index) => {
   if (index === 1) {
@@ -44,8 +44,7 @@ const progressLog = (index) => {
 };
 
 const getRandomInt = (min, max) => (Math.floor(Math.random() * (max - min + 1)) + min);
-
-const stream = fs.createWriteStream(path.join(__dirname, '/data.csv'), { flags: 'w' });
+const stream = fs.createWriteStream(path.join(__dirname, '/data1.csv'), { flags: 'w' });
 let i = 0;
 
 const writeDataJSON = () => {
@@ -54,9 +53,9 @@ const writeDataJSON = () => {
     progressLog(i);
 
     const photos = [];
-    for (let j = 0; j < 10; j += 1) {
+    for (let j = 0; j < 7; j += 1) {
       photos.push({
-        photo_description: faker.lorem.sentence(),
+        photo_description: faker.lorem.words(),
         date: faker.date.recent(),
         username: faker.name.findName(),
         photoURL: `https://s3.amazonaws.com/large-photos/img${getRandomInt(1, 500)}.jpg`,
@@ -93,7 +92,7 @@ const writeDataCSV = () => {
                     + `${restaurantId},`
                     + `restaurant${restaurantId},`
                     + `${faker.lorem.sentence()},`
-                    + `${faker.date.recent()},`
+                    + `${faker.date.recent().split(' ').slice(0, 4).join(' ')},`
                     + `${faker.name.findName()},`
                     + `https://s3.amazonaws.com/large-photos/img${getRandomInt(1, 500)}.jpg\n`;
       proceed = stream.write(entry);
@@ -110,5 +109,5 @@ const writeDataCSV = () => {
 };
 
 
-// writeDataJSON();
-writeDataCSV();
+writeDataJSON();
+// writeDataCSV();

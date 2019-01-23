@@ -26,3 +26,4 @@ dist/
 
 database/data.csv
 newrelic.js
+SDCMongoDB.pem
