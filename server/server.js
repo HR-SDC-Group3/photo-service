@@ -6,7 +6,7 @@ const morgan = require('morgan');
 const bodyparser = require('body-parser');
 const cors = require('cors');
 
-const redis = redisClient(6379, 'localhost');
+const redis = redisClient(6379, '54.183.25.44');
 const app = express();
 const port = 3003;
 const db = require('../database/index.js');
