@@ -1,4 +1,4 @@
-require('newrelic');
+// require('newrelic');
 
 const redisClient = require('redis').createClient;
 const express = require('express');
@@ -6,7 +6,7 @@ const morgan = require('morgan');
 const bodyparser = require('body-parser');
 const cors = require('cors');
 
-const redis = redisClient(6379, '54.183.25.44');
+const redis = redisClient(6379, '18.144.29.65');
 const app = express();
 const port = 3003;
 const db = require('../database/index.js');
@@ -28,6 +28,7 @@ app.get('/api/restaurants/:id/photos', (req, res) => {
   const _id = req.params.id;
 
   return redis.get(_id, (err, reply) => {
+    
     if (reply) {
       const replyJSON = JSON.parse(reply);
       return res.status(200).json(replyJSON);
